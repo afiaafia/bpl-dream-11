@@ -1,8 +1,14 @@
+import Navbar from './components/Navbar';
+import Banner from './components/Banner';
+import Players from './components/players/Players';
+
 function App() {
   return (
-    <div className="min-h-screen bg-base-200 flex items-center justify-center">
-      <h1 className="text-4xl font-bold">BPL Dream 11</h1>
-    </div>
+    <>
+      <Navbar />
+      <Banner />
+      <Players />
+    </>
   );
 }
 
