@@ -1,9 +1,10 @@
 export interface Player {
   id: number;
-  name: string;
-  image: string;
-  role: string;
-  battingType: string;
-  bowlingType: string;
+  playerName: string;
+  playerImg: string;
+  origin: string;
+  playerType: string;
+  bowlingStyle: string;
+  battingStyle: string;
   price: number;
 }

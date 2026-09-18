@@ -1,7 +1,17 @@
+import { useEffect, useState } from 'react';
+import type { Player } from '../../types/player';
 import AvailablePlayers from './AvailablePlayers';
 import SelectedPlayers from './SelectedPlayers';
 
 function Players() {
+  const [players, setPlayers] = useState<Player[]>([]);
+
+  useEffect(() => {
+    fetch('/data.json')
+      .then((response) => response.json())
+      .then((data) => setPlayers(data));
+  }, []);
+
   return (
     <main className="mx-auto max-w-7xl px-4 py-10">
       <div className="mb-10 flex items-center justify-between">
@@ -11,7 +21,7 @@ function Players() {
       </div>
 
       <div className="space-y-16">
-        <AvailablePlayers />
+        <AvailablePlayers players={players} />
         <SelectedPlayers />
       </div>
     </main>

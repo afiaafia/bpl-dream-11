@@ -1,6 +1,11 @@
+import type { Player } from '../../types/player';
 import PlayerCard from './PlayerCard';
 
-function AvailablePlayers() {
+interface AvailablePlayersProps {
+  players: Player[];
+}
+
+function AvailablePlayers({ players }: AvailablePlayersProps) {
   return (
     <section>
       <div className="mb-6">
@@ -12,9 +17,9 @@ function AvailablePlayers() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <PlayerCard />
-        <PlayerCard />
-        <PlayerCard />
+        {players.map((player) => (
+          <PlayerCard key={player.id} player={player} />
+        ))}
       </div>
     </section>
   );

@@ -1,12 +1,26 @@
-function PlayerCard() {
+import type { Player } from '../../types/player';
+
+interface PlayerCardProps {
+  player: Player;
+}
+
+function PlayerCard({ player }: PlayerCardProps) {
   return (
     <div className="card bg-base-100 shadow-sm">
       <div className="card-body">
-        <h2 className="card-title">Shakib Al Hasan</h2>
+        <img
+          src={player.playerImg}
+          alt={player.playerName}
+          className="h-56 w-full rounded-xl object-cover"
+        />
 
-        <p className="text-sm text-base-content/70">All-Rounder</p>
+        <h2 className="card-title">{player.playerName}</h2>
 
-        <p className="font-semibold">Price: 5,000,000</p>
+        <p className="text-sm text-base-content/70">{player.playerType}</p>
+
+        <p className="text-sm">{player.origin}</p>
+
+        <p className="font-semibold">Price: {player.price}</p>
 
         <div className="card-actions">
           <button className="btn btn-primary btn-sm">Choose Player</button>
