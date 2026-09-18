@@ -111,26 +111,25 @@ function Players({ coins, setCoins }: PlayersProps) {
         </div>
       </div>
 
-      <div>
-        {activeTab === 'available' && (
-          <AvailablePlayers
-            players={filteredPlayers}
-            onChoosePlayer={handleChoosePlayer}
-            selectedPlayers={selectedPlayers}
-            searchText={searchText}
-            onSearchChange={setSearchText}
-            selectedRole={selectedRole}
-            onRoleChange={setSelectedRole}
-          />
-        )}
+      {activeTab === 'available' && (
+        <AvailablePlayers
+          players={filteredPlayers}
+          onChoosePlayer={handleChoosePlayer}
+          selectedPlayers={selectedPlayers}
+          searchText={searchText}
+          onSearchChange={setSearchText}
+          selectedRole={selectedRole}
+          onRoleChange={setSelectedRole}
+        />
+      )}
 
-        {activeTab === 'selected' && (
-          <SelectedPlayers
-            selectedPlayers={selectedPlayers}
-            onRemovePlayer={handleRemovePlayer}
-          />
-        )}
-      </div>
+      {activeTab === 'selected' && (
+        <SelectedPlayers
+          selectedPlayers={selectedPlayers}
+          onRemovePlayer={handleRemovePlayer}
+          onContinueSelecting={() => setActiveTab('available')}
+        />
+      )}
     </main>
   );
 }
