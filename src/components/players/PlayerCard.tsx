@@ -12,7 +12,7 @@ interface PlayerCardProps {
 function PlayerCard({ player, onChoosePlayer, isSelected }: PlayerCardProps) {
   return (
     <div className="group overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-      <figure className="relative h-64 overflow-hidden bg-base-200">
+      <figure className="relative h-56 overflow-hidden sm:h-64">
         <img
           src={player.playerImg}
           alt={player.playerName}
@@ -30,12 +30,12 @@ function PlayerCard({ player, onChoosePlayer, isSelected }: PlayerCardProps) {
 
       <div className="p-5">
         <div className="mb-4 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
             <FaUser />
           </div>
 
-          <div>
-            <h2 className="text-xl font-bold">{player.playerName}</h2>
+          <div className="min-w-0">
+            <h2 className="truncate text-xl font-bold">{player.playerName}</h2>
 
             <p className="flex items-center gap-1 text-sm text-base-content/60">
               <FaGlobe className="text-xs" />
@@ -51,7 +51,7 @@ function PlayerCard({ player, onChoosePlayer, isSelected }: PlayerCardProps) {
               Batting
             </div>
 
-            <p className="font-semibold">{player.battingStyle}</p>
+            <p className="text-sm font-semibold">{player.battingStyle}</p>
           </div>
 
           <div className="rounded-xl bg-base-200 p-3">
@@ -60,7 +60,7 @@ function PlayerCard({ player, onChoosePlayer, isSelected }: PlayerCardProps) {
               Bowling
             </div>
 
-            <p className="font-semibold">{player.bowlingStyle}</p>
+            <p className="text-sm font-semibold">{player.bowlingStyle}</p>
           </div>
         </div>
 
@@ -70,14 +70,14 @@ function PlayerCard({ player, onChoosePlayer, isSelected }: PlayerCardProps) {
           <div>
             <p className="text-sm text-base-content/60">Player Price</p>
 
-            <h3 className="text-2xl font-extrabold text-primary">
+            <h3 className="text-xl font-extrabold text-primary sm:text-2xl">
               {player.price} coins
             </h3>
           </div>
 
           <button
             onClick={() => onChoosePlayer(player)}
-            className="btn btn-primary rounded-xl px-5 shadow-md transition-all hover:scale-105"
+            className="btn btn-primary rounded-xl px-4 shadow-md transition-all hover:scale-105 sm:px-5"
             disabled={isSelected}
           >
             {isSelected ? 'Selected' : 'Choose Player'}

@@ -53,9 +53,9 @@ function AvailablePlayers({
       </div>
 
       {players.length === 0 ? (
-        <p className="py-10 text-center text-base-content/60">
-          No players found.
-        </p>
+        <div className="rounded-2xl border border-dashed border-base-300 p-10 text-center">
+          <p className="text-base-content/60">No players found.</p>
+        </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {players.map((player) => {

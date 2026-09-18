@@ -86,13 +86,13 @@ function Players({ coins, setCoins }: PlayersProps) {
   });
 
   return (
-    <main id="players" className="mx-auto max-w-7xl px-4 py-10">
-      <div className="mb-10 flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Choose Your Players</h1>
+    <main id="players" className="mx-auto max-w-7xl px-4 py-8 sm:py-10">
+      <div className="mb-8 flex flex-col gap-5 sm:mb-10 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-2xl font-bold sm:text-3xl">Choose Your Players</h1>
 
-        <div className="flex gap-2">
+        <div className="flex w-full gap-2 sm:w-auto">
           <button
-            className={`btn ${
+            className={`btn flex-1 sm:flex-none ${
               activeTab === 'available' ? 'btn-primary' : 'btn-outline'
             }`}
             onClick={() => setActiveTab('available')}
@@ -101,7 +101,7 @@ function Players({ coins, setCoins }: PlayersProps) {
           </button>
 
           <button
-            className={`btn ${
+            className={`btn flex-1 sm:flex-none ${
               activeTab === 'selected' ? 'btn-primary' : 'btn-outline'
             }`}
             onClick={() => setActiveTab('selected')}

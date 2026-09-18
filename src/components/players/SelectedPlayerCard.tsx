@@ -13,15 +13,15 @@ function SelectedPlayerCard({
 }: SelectedPlayerCardProps) {
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm transition-shadow hover:shadow-md sm:flex-row sm:items-center sm:justify-between">
-      <div className="flex items-center gap-4">
+      <div className="flex min-w-0 items-center gap-4">
         <img
           src={player.playerImg}
           alt={player.playerName}
-          className="h-20 w-20 rounded-xl object-cover"
+          className="h-20 w-20 shrink-0 rounded-xl object-cover"
         />
 
-        <div>
-          <h3 className="text-lg font-bold">{player.playerName}</h3>
+        <div className="min-w-0">
+          <h3 className="truncate text-lg font-bold">{player.playerName}</h3>
 
           <p className="text-sm text-base-content/60">{player.playerType}</p>
 
@@ -32,7 +32,7 @@ function SelectedPlayerCard({
       </div>
 
       <button
-        className="btn btn-error btn-sm gap-2"
+        className="btn btn-error btn-sm gap-2 sm:self-auto"
         onClick={() => onRemovePlayer(player.id)}
       >
         <FaTrash />
