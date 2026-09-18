@@ -1,18 +1,22 @@
 import { useEffect, useState } from 'react';
-import type { Player } from '../../types/player';
+import type { Dispatch, SetStateAction } from 'react';
 import { toast } from 'react-toastify';
 
+import type { Player } from '../../types/player';
 import AvailablePlayers from './AvailablePlayers';
 import SelectedPlayers from './SelectedPlayers';
 
 interface PlayersProps {
   coins: number;
-  setCoins: React.Dispatch<React.SetStateAction<number>>;
+  setCoins: Dispatch<SetStateAction<number>>;
 }
 
 function Players({ coins, setCoins }: PlayersProps) {
   const [players, setPlayers] = useState<Player[]>([]);
   const [selectedPlayers, setSelectedPlayers] = useState<Player[]>([]);
+  const [activeTab, setActiveTab] = useState<'available' | 'selected'>(
+    'available'
+  );
 
   useEffect(() => {
     fetch('/data.json')
@@ -72,21 +76,41 @@ function Players({ coins, setCoins }: PlayersProps) {
       <div className="mb-10 flex items-center justify-between">
         <h1 className="text-3xl font-bold">Choose Your Players</h1>
 
-        <button className="btn btn-outline">
-          Selected ({selectedPlayers.length}/6)
-        </button>
+        <div className="flex gap-2">
+          <button
+            className={`btn ${
+              activeTab === 'available' ? 'btn-primary' : 'btn-outline'
+            }`}
+            onClick={() => setActiveTab('available')}
+          >
+            Available
+          </button>
+
+          <button
+            className={`btn ${
+              activeTab === 'selected' ? 'btn-primary' : 'btn-outline'
+            }`}
+            onClick={() => setActiveTab('selected')}
+          >
+            Selected ({selectedPlayers.length}/6)
+          </button>
+        </div>
       </div>
 
-      <div className="space-y-16">
-        <AvailablePlayers
-          players={players}
-          onChoosePlayer={handleChoosePlayer}
-        />
+      <div>
+        {activeTab === 'available' && (
+          <AvailablePlayers
+            players={players}
+            onChoosePlayer={handleChoosePlayer}
+          />
+        )}
 
-        <SelectedPlayers
-          selectedPlayers={selectedPlayers}
-          onRemovePlayer={handleRemovePlayer}
-        />
+        {activeTab === 'selected' && (
+          <SelectedPlayers
+            selectedPlayers={selectedPlayers}
+            onRemovePlayer={handleRemovePlayer}
+          />
+        )}
       </div>
     </main>
   );

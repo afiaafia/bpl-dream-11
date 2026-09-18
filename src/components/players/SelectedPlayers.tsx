@@ -12,20 +12,10 @@ function SelectedPlayers({
 }: SelectedPlayersProps) {
   return (
     <section>
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold">
-          Selected Players ({selectedPlayers.length})
-        </h2>
-
-        <p className="mt-1 text-sm text-base-content/60">
-          Your selected players will appear here.
-        </p>
-      </div>
+      <h2 className="mb-6 text-2xl font-bold">Selected Players</h2>
 
       {selectedPlayers.length === 0 ? (
-        <p className="rounded-xl border border-dashed p-6 text-center text-base-content/60">
-          No players selected yet.
-        </p>
+        <p className="text-base-content/60">No players selected yet.</p>
       ) : (
         <div className="space-y-4">
           {selectedPlayers.map((player) => (
