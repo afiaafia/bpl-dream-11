@@ -4,9 +4,20 @@ import PlayerCard from './PlayerCard';
 interface AvailablePlayersProps {
   players: Player[];
   onChoosePlayer: (player: Player) => void;
+  searchText: string;
+  onSearchChange: (value: string) => void;
+  selectedRole: string;
+  onRoleChange: (value: string) => void;
 }
 
-function AvailablePlayers({ players, onChoosePlayer }: AvailablePlayersProps) {
+function AvailablePlayers({
+  players,
+  onChoosePlayer,
+  searchText,
+  onSearchChange,
+  selectedRole,
+  onRoleChange,
+}: AvailablePlayersProps) {
   return (
     <section>
       <div className="mb-6">
@@ -17,15 +28,43 @@ function AvailablePlayers({ players, onChoosePlayer }: AvailablePlayersProps) {
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {players.map((player) => (
-          <PlayerCard
-            key={player.id}
-            player={player}
-            onChoosePlayer={onChoosePlayer}
-          />
-        ))}
+      <div className="mb-8 flex flex-col gap-4 md:flex-row">
+        <input
+          type="text"
+          placeholder="Search player..."
+          value={searchText}
+          onChange={(event) => onSearchChange(event.target.value)}
+          className="input input-bordered w-full md:flex-1"
+        />
+
+        <select
+          value={selectedRole}
+          onChange={(event) => onRoleChange(event.target.value)}
+          className="select select-bordered w-full md:w-60"
+        >
+          <option value="All">All Players</option>
+          <option value="Batter">Batter</option>
+          <option value="Bowler">Bowler</option>
+          <option value="All-Rounder">All-Rounder</option>
+          <option value="Wicket-Keeper Batter">Wicket-Keeper Batter</option>
+        </select>
       </div>
+
+      {players.length === 0 ? (
+        <p className="py-10 text-center text-base-content/60">
+          No players found.
+        </p>
+      ) : (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {players.map((player) => (
+            <PlayerCard
+              key={player.id}
+              player={player}
+              onChoosePlayer={onChoosePlayer}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

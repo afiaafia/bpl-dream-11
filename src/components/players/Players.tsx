@@ -18,6 +18,9 @@ function Players({ coins, setCoins }: PlayersProps) {
     'available'
   );
 
+  const [searchText, setSearchText] = useState('');
+  const [selectedRole, setSelectedRole] = useState('All');
+
   useEffect(() => {
     fetch('/data.json')
       .then((response) => response.json())
@@ -71,6 +74,17 @@ function Players({ coins, setCoins }: PlayersProps) {
     toast.info(`${playerToRemove.playerName} removed.`);
   };
 
+  const filteredPlayers = players.filter((player) => {
+    const matchesSearch = player.playerName
+      .toLowerCase()
+      .includes(searchText.toLowerCase());
+
+    const matchesRole =
+      selectedRole === 'All' || player.playerType === selectedRole;
+
+    return matchesSearch && matchesRole;
+  });
+
   return (
     <main className="mx-auto max-w-7xl px-4 py-10">
       <div className="mb-10 flex items-center justify-between">
@@ -100,8 +114,12 @@ function Players({ coins, setCoins }: PlayersProps) {
       <div>
         {activeTab === 'available' && (
           <AvailablePlayers
-            players={players}
+            players={filteredPlayers}
             onChoosePlayer={handleChoosePlayer}
+            searchText={searchText}
+            onSearchChange={setSearchText}
+            selectedRole={selectedRole}
+            onRoleChange={setSelectedRole}
           />
         )}
 
