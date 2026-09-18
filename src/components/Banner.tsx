@@ -1,8 +1,9 @@
 interface BannerProps {
   onClaimCoins: () => void;
+  hasClaimed: boolean;
 }
 
-function Banner({ onClaimCoins }: BannerProps) {
+function Banner({ onClaimCoins, hasClaimed }: BannerProps) {
   return (
     <section className="mx-auto max-w-7xl px-4 py-10">
       <div className="rounded-2xl bg-base-200 px-6 py-16 text-center">
@@ -15,8 +16,12 @@ function Banner({ onClaimCoins }: BannerProps) {
           team.
         </p>
 
-        <button className="btn btn-primary mt-6" onClick={onClaimCoins}>
-          Claim Free Coins
+        <button
+          className="btn btn-primary mt-6"
+          onClick={onClaimCoins}
+          disabled={hasClaimed}
+        >
+          {hasClaimed ? 'Coins Claimed' : 'Claim Free Coins'}
         </button>
       </div>
     </section>

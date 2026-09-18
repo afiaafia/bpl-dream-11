@@ -8,9 +8,15 @@ import Players from './components/players/Players';
 
 function App() {
   const [coins, setCoins] = useState(1000);
+  const [hasClaimed, setHasClaimed] = useState(false);
 
   const handleClaimCoins = () => {
+    if (hasClaimed) {
+      return;
+    }
+
     setCoins((currentCoins) => currentCoins + 1000);
+    setHasClaimed(true);
 
     toast.success('1000 coins added successfully!');
   };
@@ -19,7 +25,7 @@ function App() {
     <>
       <Navbar coins={coins} />
 
-      <Banner onClaimCoins={handleClaimCoins} />
+      <Banner onClaimCoins={handleClaimCoins} hasClaimed={hasClaimed} />
 
       <Players coins={coins} setCoins={setCoins} />
 
