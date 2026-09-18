@@ -4,6 +4,7 @@ import PlayerCard from './PlayerCard';
 interface AvailablePlayersProps {
   players: Player[];
   onChoosePlayer: (player: Player) => void;
+  selectedPlayers: Player[];
   searchText: string;
   onSearchChange: (value: string) => void;
   selectedRole: string;
@@ -13,6 +14,7 @@ interface AvailablePlayersProps {
 function AvailablePlayers({
   players,
   onChoosePlayer,
+  selectedPlayers,
   searchText,
   onSearchChange,
   selectedRole,
@@ -56,13 +58,20 @@ function AvailablePlayers({
         </p>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {players.map((player) => (
-            <PlayerCard
-              key={player.id}
-              player={player}
-              onChoosePlayer={onChoosePlayer}
-            />
-          ))}
+          {players.map((player) => {
+            const isSelected = selectedPlayers.some(
+              (selectedPlayer) => selectedPlayer.id === player.id
+            );
+
+            return (
+              <PlayerCard
+                key={player.id}
+                player={player}
+                onChoosePlayer={onChoosePlayer}
+                isSelected={isSelected}
+              />
+            );
+          })}
         </div>
       )}
     </section>

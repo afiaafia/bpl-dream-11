@@ -116,6 +116,7 @@ function Players({ coins, setCoins }: PlayersProps) {
           <AvailablePlayers
             players={filteredPlayers}
             onChoosePlayer={handleChoosePlayer}
+            selectedPlayers={selectedPlayers}
             searchText={searchText}
             onSearchChange={setSearchText}
             selectedRole={selectedRole}
