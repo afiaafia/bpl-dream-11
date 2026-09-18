@@ -86,7 +86,7 @@ function Players({ coins, setCoins }: PlayersProps) {
   });
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-10">
+    <main id="players" className="mx-auto max-w-7xl px-4 py-10">
       <div className="mb-10 flex items-center justify-between">
         <h1 className="text-3xl font-bold">Choose Your Players</h1>
 

@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './components/Navbar';
 import Banner from './components/Banner';
 import Players from './components/players/Players';
+import Footer from './components/Footer';
 
 function App() {
   const [coins, setCoins] = useState(1000);
@@ -28,6 +29,8 @@ function App() {
       <Banner onClaimCoins={handleClaimCoins} hasClaimed={hasClaimed} />
 
       <Players coins={coins} setCoins={setCoins} />
+
+      <Footer />
 
       <ToastContainer position="top-right" />
     </>
