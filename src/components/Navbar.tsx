@@ -1,4 +1,8 @@
-function Navbar() {
+interface NavbarProps {
+  coins: number;
+}
+
+function Navbar({ coins }: NavbarProps) {
   return (
     <nav className="border-b bg-base-100">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
@@ -13,7 +17,7 @@ function Navbar() {
             Players
           </a>
 
-          <button className="btn btn-sm">0 Coin</button>
+          <button className="btn btn-sm">{coins} Coin</button>
         </div>
       </div>
     </nav>

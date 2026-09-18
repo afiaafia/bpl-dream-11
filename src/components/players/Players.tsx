@@ -1,9 +1,16 @@
 import { useEffect, useState } from 'react';
 import type { Player } from '../../types/player';
+import { toast } from 'react-toastify';
+
 import AvailablePlayers from './AvailablePlayers';
 import SelectedPlayers from './SelectedPlayers';
 
-function Players() {
+interface PlayersProps {
+  coins: number;
+  setCoins: React.Dispatch<React.SetStateAction<number>>;
+}
+
+function Players({ coins, setCoins }: PlayersProps) {
   const [players, setPlayers] = useState<Player[]>([]);
   const [selectedPlayers, setSelectedPlayers] = useState<Player[]>([]);
 
@@ -15,6 +22,7 @@ function Players() {
 
   const handleChoosePlayer = (player: Player) => {
     if (selectedPlayers.length >= 6) {
+      toast.error('You can select a maximum of 6 players.');
       return;
     }
 
@@ -23,18 +31,40 @@ function Players() {
     );
 
     if (alreadySelected) {
+      toast.warning('This player is already selected.');
+      return;
+    }
+
+    if (coins < player.price) {
+      toast.error('Not enough coins to select this player.');
       return;
     }
 
     setSelectedPlayers([...selectedPlayers, player]);
+
+    setCoins((currentCoins) => currentCoins - player.price);
+
+    toast.success(`${player.playerName} selected successfully!`);
   };
 
   const handleRemovePlayer = (playerId: number) => {
+    const playerToRemove = selectedPlayers.find(
+      (player) => player.id === playerId
+    );
+
+    if (!playerToRemove) {
+      return;
+    }
+
     const remainingPlayers = selectedPlayers.filter(
       (player) => player.id !== playerId
     );
 
     setSelectedPlayers(remainingPlayers);
+
+    setCoins((currentCoins) => currentCoins + playerToRemove.price);
+
+    toast.info(`${playerToRemove.playerName} removed.`);
   };
 
   return (

@@ -1,4 +1,8 @@
-function Banner() {
+interface BannerProps {
+  onClaimCoins: () => void;
+}
+
+function Banner({ onClaimCoins }: BannerProps) {
   return (
     <section className="mx-auto max-w-7xl px-4 py-10">
       <div className="rounded-2xl bg-base-200 px-6 py-16 text-center">
@@ -11,7 +15,9 @@ function Banner() {
           team.
         </p>
 
-        <button className="btn btn-primary mt-6">Claim Free Coins</button>
+        <button className="btn btn-primary mt-6" onClick={onClaimCoins}>
+          Claim Free Coins
+        </button>
       </div>
     </section>
   );
