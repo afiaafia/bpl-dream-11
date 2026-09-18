@@ -2,9 +2,10 @@ import type { Player } from '../../types/player';
 
 interface PlayerCardProps {
   player: Player;
+  onChoosePlayer: (player: Player) => void;
 }
 
-function PlayerCard({ player }: PlayerCardProps) {
+function PlayerCard({ player, onChoosePlayer }: PlayerCardProps) {
   return (
     <div className="card bg-base-100 shadow-sm">
       <div className="card-body">
@@ -23,7 +24,12 @@ function PlayerCard({ player }: PlayerCardProps) {
         <p className="font-semibold">Price: {player.price}</p>
 
         <div className="card-actions">
-          <button className="btn btn-primary btn-sm">Choose Player</button>
+          <button
+            className="btn btn-primary btn-sm"
+            onClick={() => onChoosePlayer(player)}
+          >
+            Choose Player
+          </button>
         </div>
       </div>
     </div>

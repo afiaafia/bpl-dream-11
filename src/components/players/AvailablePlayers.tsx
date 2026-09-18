@@ -3,9 +3,10 @@ import PlayerCard from './PlayerCard';
 
 interface AvailablePlayersProps {
   players: Player[];
+  onChoosePlayer: (player: Player) => void;
 }
 
-function AvailablePlayers({ players }: AvailablePlayersProps) {
+function AvailablePlayers({ players, onChoosePlayer }: AvailablePlayersProps) {
   return (
     <section>
       <div className="mb-6">
@@ -18,7 +19,11 @@ function AvailablePlayers({ players }: AvailablePlayersProps) {
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {players.map((player) => (
-          <PlayerCard key={player.id} player={player} />
+          <PlayerCard
+            key={player.id}
+            player={player}
+            onChoosePlayer={onChoosePlayer}
+          />
         ))}
       </div>
     </section>
